@@ -1,0 +1,45 @@
+<?php
+	session_start();
+	
+	$conn = mysqli_connect("127.0.0.1", "root", "1007", "myDB");
+	/*
+	if($db)
+		echo "db 연결성공";
+	else
+		echo "db 연결 실패";
+	*/
+	
+?>
+
+<html>
+	<h3><?=$_SESSION['id']?>회원님의 장바구니</h3>
+	
+	<table width="400" border="1">
+			<tr>
+				<th>분류</th>
+				<th>상품 이름</th>
+				<th>가격</th>
+				<th>수량</th>
+			</tr>
+
+<?php
+	$id = $_SESSION['id'];
+	
+	$sql = "select * from personalcart";
+	$result = mysqli_query($conn, $sql);
+	
+	while ($row = mysqli_fetch_array($result))
+	{
+	 	echo "<tr>
+		<td align=center>$row[0]</td>
+		<td align=center>$row[1]</td>
+		<td align=center>$row[2]</td>
+		<td align=center>$row[3]</td>
+		</tr>";
+	}
+?>	
+	</table>
+	<br/>
+	<button type="button" onclick="location.href='orderAdd2.php'"> 전체 주문 하기 </button>
+
+</html>

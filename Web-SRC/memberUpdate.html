@@ -1,0 +1,34 @@
+<?php
+	session_start();
+	
+	$conn = mysqli_connect("127.0.0.1", "root", "1007", "myDB");
+	/*
+	if($db)
+		echo "db 연결성공";
+	else
+		echo "db 연결 실패";
+	*/
+	
+	$id = $_SESSION['id'];
+?>
+
+<html>
+<body>
+	<form name="update" method="post" action="memberUpdate.php">
+		<h3><?=$_SESSION['id']?>회원님의 비밀번호 변경</h3>
+		
+		<table border="1">
+			<tr>
+				<td>변경할 비밀번호</td>
+				<td><input type="password" size="30" name="psw1"></td>
+			</tr>
+			<tr>
+				<td>변경할 비밀번호 확인</td>
+				<td><input type="password" size="30" name="psw2"></td>
+			</tr>
+		</table>
+		<br/>
+
+		<input type=submit value="확인"> <input type=reset value="지우기">
+	</form>
+</body>

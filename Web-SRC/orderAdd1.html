@@ -1,0 +1,66 @@
+<?php
+	session_start();
+	
+	$conn = mysqli_connect("127.0.0.1", "root", "1007", "myDB");
+	/*
+	if($db)
+		echo "db 연결성공";
+	else
+		echo "db 연결 실패";
+	*/
+	
+?>
+
+<html>
+	<h3>주문하기</h3>
+	
+	<table width="400" border="1">
+		<caption>상품 목록</caption>
+			<tr>
+				<th>상품 번호</th>
+				<th>분류</th>
+				<th>상품 이름</th>
+				<th>재고</th>
+				<th>가격</th>
+			</tr>
+
+<?php
+	$sql = "select * from product";
+	$result = mysqli_query($conn, $sql);
+	
+	while ($row = mysqli_fetch_array($result))
+	{
+		echo "<tr>
+			<td align=center>$row[0]</td>
+			<td align=center>$row[2]</td>
+			<td align=center>$row[1]</td>
+			<td align=center>$row[3]</td>
+			<td align=center>$row[4]</td></td>
+			</tr>";
+	}
+?>	
+
+	<form name="cartAdd" method="post" action="orderAdd1.php">
+	
+	<table border="1" width="400">
+	
+	<br/>
+	<br/>
+	
+	<caption>원하는 상품의 번호와 수량을 입력해주세요.</caption>
+		<tr>
+			<td>상품 번호</td>
+			<td><input type="text" size="40" name="p_id"></td>
+		</tr>
+		<tr>
+			<td>수량</td>
+			<td><input type="number" name="p_num" min="0" max="10"></td>
+		</tr>
+	</table>
+	
+	<br/>
+	<input type=submit value="주문하기"> <input type=reset value="지우기">
+
+	</form>
+	
+</html>
